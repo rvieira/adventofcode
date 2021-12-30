@@ -33,6 +33,15 @@ int get_depth(int index) {
     return current_depth->depth;
 }
 
+void free_list() {
+    struct Depth *tmp;
+    while (head != NULL) {
+        tmp = head;
+        head = head->next;
+        free(tmp);
+    }
+}
+
 int main()
 {
     int previous_depth=-1, i=0, j, count_deeper=0, previous_window, current_window;
@@ -52,4 +61,5 @@ int main()
         if (current_window > previous_window) count_deeper++;
     }
     printf("%i\n",count_deeper);
+    free_list();
 }
